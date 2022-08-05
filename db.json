@@ -1,0 +1,33 @@
+{
+  "comment_list": [
+    {
+      "id": 0,
+      "username": "작성자이름1",
+      "content": "내용1",
+      "isUpdate": false,
+      "todo_id": 1
+    },
+    {
+      "username": "하나",
+      "content": "둘",
+      "todo_id": 3,
+      "id": 1,
+      "isUpdate": false
+    },
+    {
+      "username": "둘",
+      "content": "셋",
+      "todo_id": 3,
+      "id": 2,
+      "isUpdate": false
+    }
+  ],
+  "todo_list": [
+    {
+      "id": 0,
+      "name": "작성자이름",
+      "title": "제목",
+      "content": "내용"
+    }
+  ]
+}
