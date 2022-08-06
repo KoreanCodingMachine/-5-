@@ -7,12 +7,14 @@ function ListItem({ post, onDeleteHandler }) {
     <>
       <StyledContainer>
         <StyledContents>
-          <h3>{post.title}</h3>
-          <p>{post.contents}</p>
+          <StyledLink to={`/detail/${post.id}`}>
+            <h3>{post.title}</h3>
+            <p>{post.contents}</p>
+          </StyledLink>
           <StyledItemButtons>
             {/*  onClick={() => onToggleHandler(todo.id) */}
             <button onClick={() => onDeleteHandler(post.id)}>삭제</button>
-            <Link to={`/detail/${post.id}`}>
+            <Link to={`/update/${post.id}`}>
               <button>수정</button>
             </Link>
           </StyledItemButtons>
@@ -68,6 +70,10 @@ const StyledItemButtons = styled.div`
     border: 1px solid white;
     color: white;
   }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
 
 export default ListItem;

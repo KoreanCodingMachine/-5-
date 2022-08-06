@@ -12,9 +12,11 @@ function List() {
     dispatch(__getPostList());
   }, []);
 
-  const onDeleteHandler = (postId) => {
-    dispatch(__deletePost(postId));
+  const onDeleteHandler = async (postId) => {
+    await dispatch(__deletePost(postId));
+    window.location.replace("/");
   };
+
   const onToggleHandler = (postId) => {
     dispatch();
   };
