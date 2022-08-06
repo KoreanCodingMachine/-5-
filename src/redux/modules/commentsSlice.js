@@ -1,4 +1,4 @@
-import {createSlice, configureStore, createAsyncThunk} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from "axios";
 
 
@@ -6,11 +6,11 @@ export const __getCommnetsByTodoId = createAsyncThunk(
   "GET_COMMENT_BY_TODO_ID",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/comment_list?todo_Id=${arg}`);
+      const { data } = await axios.get(`http://localhost:5001/comment_list?todoId=${arg}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
-    }
+    } 
   }
 );
 
@@ -53,11 +53,6 @@ export const __updateComment = createAsyncThunk(
 );
 
 const initialState = {
-  comments: {
-    data: [],
-    isLoading: false,
-    error: null,
-  },
   commentsByTodoId: {
     data: [],
     isLoading: false,
@@ -70,22 +65,11 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {
     clearTodo: (state) => {
-      state.comments = null;
+      state.comments = null;  
     },
   },
   extraReducers: {
-    // 전체 댓글 조회
-    // [__getCommentsThunk.pending]: (state) => {
-    //   state.comments.isLoading = true;
-    // },
-    // [__getCommentsThunk.fulfilled]: (state, action) => {
-    //   state.comments.isLoading = false;
-    //   state.comments.data = action.payload;
-    // },
-    // [__getCommentsThunk.rejected]: (state, action) => {
-    //   state.comments.isLoading = false;
-    //   state.comments.error = action.payload;
-    // },
+  
 
     // 댓글 조회 (todoId)
     [__getCommnetsByTodoId.pending]: (state) => {
@@ -141,42 +125,3 @@ export const commentsSlice = createSlice({
 });
 
 export default commentsSlice.reducer;
-
-
-
-
-
-
-// const comments = createSlice({
-//   name: 'comments',
-//   initialState: {
-//         list: []
-//       },
-//   reducers: {
-//     createComment: (state, action) => {
-//           state.list.push(action.payload);
-//       },
-//       updateComment: (state, action) => {
-//         state.list.map(cur => {
-//                      if(cur.id === parseInt(action.payload.id)) {                      
-//                         cur.isUpdate = !action.payload.isUpdate
-//                         cur.content = action.payload.content ;
-//                      }
-//                      }
-//         )}
-//       ,
-//       deleteComment: (state, action) => {
-//      state.list= state.list.filter(cur=>action.payload !== cur.id)
-//       },
-//       setCommentList: (state, action) => {
-//         console.log(action.payload);
-//         state.list = action.payload;
-//       },
-//   }   
-// });
-
-// const store = configureStore({reducer: comments.reducer});
-
-// export const{createComment, updateComment, deleteComment, setCommentList} = comments.actions;
-
-// export default store;

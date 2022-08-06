@@ -22,8 +22,7 @@ const initialState = {
     todoId: 0,
   },
   isLoading: false,
-  error: null,
-  isGlobalEditmode: false,
+  error: null
 };
 
 export const commentSlice = createSlice({
@@ -32,10 +31,7 @@ export const commentSlice = createSlice({
   reducers: {
     clearComment: (state) => {
       state.data.content = "";
-    },
-    globalEditModeToggle: (state, action) => {
-      state.isGlobalEditmode = action.payload;
-    },
+    }
   },
   extraReducers: {
     [__getComment.fulfilled]: (state, action) => {
