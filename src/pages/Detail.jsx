@@ -8,19 +8,6 @@ import { __addPost, __updatePost } from "../redux/modules/postSlice";
 import axios from "axios";
 
 function Detail() {
-  // useMatch로 해당 주소가 맞는지 검사한다.
-  const match = useMatch("/update/:id");
-  const match2 = useMatch("/detail/:id");
-  console.log(match2);
-
-  // 옵셔널 체이닝으로 id가 존재하면 post_id 저장
-  let post_id = match?.params.id;
-  if (match) {
-    post_id = match.params.id;
-  } else if (match2) {
-    post_id = match2.params.id;
-  }
-
   const dispatch = useDispatch();
   const inputRef = useRef(null); //input에 focus 주기
 
@@ -33,6 +20,19 @@ function Detail() {
   };
 
   const [post, setPost] = useState(initialState);
+
+  // useMatch로 해당 주소가 맞는지 검사한다.
+  const match = useMatch("/update/:id");
+  const match2 = useMatch("/detail/:id");
+  console.log(match2);
+
+  // 옵셔널 체이닝으로 id가 존재하면 post_id 저장
+  let post_id = match?.params.id;
+  if (match) {
+    post_id = match.params.id;
+  } else if (match2) {
+    post_id = match2.params.id;
+  }
 
   // 초기렌더링 시 input에 focus 주기
   // 비동기통신으로 id에 해당하는 post 정보 가져오기
