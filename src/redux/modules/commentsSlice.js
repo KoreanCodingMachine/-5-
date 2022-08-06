@@ -64,9 +64,6 @@ export const commentsSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
-    clearTodo: (state) => {
-      state.comments = null;  
-    },
   },
   extraReducers: {
   

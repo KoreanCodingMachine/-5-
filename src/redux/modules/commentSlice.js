@@ -40,5 +40,5 @@ export const commentSlice = createSlice({
   },
 });
 
-export const { clearComment, globalEditModeToggle } = commentSlice.actions;
+export const { clearComment} = commentSlice.actions;
 export default commentSlice.reducer;
