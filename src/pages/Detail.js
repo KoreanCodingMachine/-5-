@@ -5,8 +5,8 @@ import {useParams, useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 
 
-import Comment from "../components/Comment";
-import { __addComment,__getCommnetsByTodoId } from "../redux/modules/comments";
+import Comment from "../components/comments/Comment";
+import { __addComment,__getCommnetsByTodoId } from "../redux/modules/commentsSlice";
 
 const Detail = ()=>{
     const todo={
@@ -20,39 +20,6 @@ const Detail = ()=>{
 
     const { data } = useSelector((state) => state.comments.commentsByTodoId);
     const navigate =useNavigate(); 
-
-    // const allComment_list = useSelector((state)=>state.list);
-    // console.log(allComment_list)
-    // const comment_list = allComment_list.filter(cur => cur.todo_id===todo.id)
-    // const comment_name_ref = useRef(null);
-    // const comment_content_ref = useRef(null);
-    // const todo = todo_list.find(cur=>cur.id === Number(params.id))
-    
-    
-
-    // const onSubmitHandler = (event) => {
-    //     event.preventDefault();
-    //     const comment_data ={
-    //     name : comment_name_ref.current.value, 
-    //     content: comment_content_ref.current.value, 
-    //     todo_id: todo.id
-    //   };
-    //     // dispatch(createComment(comment_data));
-    //     axios.post("http://localhost:5001/comment_list", comment_data);
-    //     comment_name_ref.current.value="";
-    //     comment_content_ref.current.value="";
-    //     window.location.reload();
-    //   };
-
-    //   const getCommentList = async () => {
-    //   const res = await axios.get(
-    //     `http://localhost:5001/comment_list`);
-    //     dispatch(setCommentList(res.data));
-    // }
-  
-    // useEffect(() => {
-    //     getCommentList();
-    // }, []);
 
     useEffect(() => {
 

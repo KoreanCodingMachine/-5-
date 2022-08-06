@@ -26,6 +26,32 @@ export const __addComment = createAsyncThunk(
   }
 );
 
+
+export const __deleteComment = createAsyncThunk(
+  "DELETE_COMMENT",
+  async (arg, thunkAPI) => {
+    try {
+      await axios.delete(`http://localhost:5001/comment_list/${arg}`);
+      return thunkAPI.fulfillWithValue(arg);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
+
+
+export const __updateComment = createAsyncThunk(
+  "UPDATE_COMMENT",
+  async (arg, thunkAPI) => {
+    try {
+      axios.patch(`http://localhost:5001/comment_list/${arg.id}`, arg);
+      return thunkAPI.fulfillWithValue(arg);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 const initialState = {
   comments: {
     data: [],
@@ -74,31 +100,31 @@ export const commentsSlice = createSlice({
       state.commentsByTodoId.error = action.payload;
     },
 
-  //   // 댓글 삭제
-  //   [__deleteComment.pending]: (state) => {
-  //     state.commentsByTodoId.isLoading = true;
-  //   },
-  //   [__deleteComment.fulfilled]: (state, action) => {
-  //     state.commentsByTodoId.isLoading = false;
-  //     const target = state.commentsByTodoId.data.findIndex(
-  //       (comment) => comment.id === action.payload
-  //     );
-  //     state.commentsByTodoId.data.splice(target, 1);
-  //   },
-  //   [__deleteComment.rejected]: (state, action) => {
-  //     state.commentsByTodoId.isLoading = false;
-  //     state.commentsByTodoId.error = action.payload;
-  //   },
+    // 댓글 삭제
+    [__deleteComment.pending]: (state) => {
+      state.commentsByTodoId.isLoading = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      state.commentsByTodoId.isLoading = false;
+      const target = state.commentsByTodoId.data.findIndex(
+        (comment) => comment.id === action.payload
+      );
+      state.commentsByTodoId.data.splice(target, 1);
+    },
+    [__deleteComment.rejected]: (state, action) => {
+      state.commentsByTodoId.isLoading = false;
+      state.commentsByTodoId.error = action.payload;
+    },
 
   //   // 댓글 수정
-  //   [__updateComment.pending]: (state) => {},
-  //   [__updateComment.fulfilled]: (state, action) => {
-  //     const target = state.commentsByTodoId.data.findIndex(
-  //       (comment) => comment.id === action.payload.id
-  //     );
-  //     state.commentsByTodoId.data.splice(target, 1, action.payload);
-  //   },
-  //   [__updateComment.rejected]: () => {},
+    [__updateComment.pending]: (state) => {},
+    [__updateComment.fulfilled]: (state, action) => {
+      const target = state.commentsByTodoId.data.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      state.commentsByTodoId.data.splice(target, 1, action.payload);
+    },
+    [__updateComment.rejected]: () => {},
     // 댓글 추가
     [__addComment.fulfilled]: (state, action) => {
       state.commentsByTodoId.isLoading = false;
