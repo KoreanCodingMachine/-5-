@@ -1,19 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import { Route, Routes } from "react-router-dom";
 
-import Main from "./pages/Main";
-import Detail from "./pages/Detail";
-
+import Home from './pages/Home';
+import Detail from './pages/Detail';
+import Form from './pages/Form';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-          <Route path="/" element={<Main />}/>          
-          <Route path="/detail/:id" element={<Detail />}/>
-        </Routes>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/detail/:id' element={<Detail />} />
+      <Route path='/write' element={<Form />} />
+    </Routes>
+
   );
 }
 
