@@ -7,8 +7,8 @@ import axios from 'axios';
 import Comment from "../components/comments/Comment";
 import { clearTodo } from "../redux/modules/todoSlice";
 import { __getCommnetsByTodoId } from "../redux/modules/commentsSlice";
-import AddComment from "../components/comments/AddComment";
-import { useInView } from "react-intersection-observer"
+import Addcomment from "../components/comments/Addcomment";
+
 
 const Detail = ()=>{
     
@@ -38,7 +38,7 @@ const Detail = ()=>{
             <div>내용 : {todo.content}</div>
 
 
-            <AddComment />
+            <Addcomment />
             <div>
           {data.map((comment) => (
             <Comment key={comment.id} comment={comment} />

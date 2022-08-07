@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { __addComment } from "../../redux/modules/commentsSlice";
 
-const AddCommentForm = () => {
+const AddComment = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -61,4 +61,4 @@ const AddCommentForm = () => {
   );
 };
 
-export default AddCommentForm;
+export default AddComment;
