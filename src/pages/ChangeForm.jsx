@@ -4,7 +4,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { putAsyncData, getAsyncData } from '../redux/modules/postSlice';
 import { useDispatch } from 'react-redux';
 
-const Detail = () => {
+const ChangeForm = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -72,4 +72,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default ChangeForm;

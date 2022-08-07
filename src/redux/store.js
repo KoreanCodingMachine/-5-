@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import postReducer from './modules/postSlice';
-import comments from "./modules/commentsSlice"; 
-import comment from "./modules/commentSlice";
-import todo from "./modules/todoSlice";
-import todos from "./modules/todosSlice";
+
+import comments from './modules/commentsSlice';
+import comment from './modules/commentSlice';
+import todo from './modules/todoSlice';
+import todos from './modules/todosSlice';
 
 
 export const store = configureStore({
@@ -12,7 +13,7 @@ export const store = configureStore({
     comments,
     comment,
     todo,
-    todos
+    todos,
   },
 });
 
