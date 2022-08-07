@@ -7,14 +7,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const ListItem = ({ item }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Wrapper>
-      <section className='title'>
+      <section className='title' onClick={() => navigate('/detail/' + item.id)}>
         <h2>{item.title}</h2>
         <p>{item.content}</p>
       </section>
       <section>
-        <Link to={`/detail/${item.id}`} state={{ item: item }}>
+        <Link to={`/changeform/${item.id}`} state={{ item: item }}>
           <Button
           // onClick={() => {
           //   navigate(`/detail/${item.id}`);
