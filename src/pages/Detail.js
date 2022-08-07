@@ -11,13 +11,12 @@ import AddComment from "../components/comments/AddComment";
 import { useInView } from "react-intersection-observer"
 
 const Detail = ()=>{
-    const [ref, inView] = useInView()
+    
     const { id } = useParams();
     const dispatch = useDispatch();
     const todo_list = useSelector((state)=>state.todos.data);
     const todo = todo_list.find(cur=>cur.id == id)
     const navigate =useNavigate(); 
-
 
     useEffect(() => {
           dispatch(__getCommnetsByTodoId(id));
