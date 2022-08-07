@@ -56,7 +56,7 @@ const ChangeForm = () => {
           <input type='text' value={title} onChange={onChangeTitle} />
         </label>
         <label htmlFor='content'>
-          내용:
+          내용11:
           <input type='text' value={content} onChange={onChangeContent} />
         </label>
       </div>
