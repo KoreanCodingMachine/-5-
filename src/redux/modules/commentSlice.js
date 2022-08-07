@@ -1,12 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
+const URI = {
+  BASE: process.env.REACT_APP_BASE_URI2,
+};
 
 export const __getComment = createAsyncThunk(
-  "GET_COMMENT",
+  'GET_COMMENT',
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/comment_list/${arg}`);
+      const { data } = await axios.get(`${URI.BASE}/${arg}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -16,22 +19,22 @@ export const __getComment = createAsyncThunk(
 
 const initialState = {
   data: {
-    content: "",
-    username: "",
+    content: '',
+    username: '',
     id: 0,
     todoId: 0,
   },
   isLoading: false,
-  error: null
+  error: null,
 };
 
 export const commentSlice = createSlice({
-  name: "comment",
+  name: 'comment',
   initialState,
   reducers: {
     clearComment: (state) => {
-      state.data.content = "";
-    }
+      state.data.content = '';
+    },
   },
   extraReducers: {
     [__getComment.fulfilled]: (state, action) => {
@@ -40,5 +43,5 @@ export const commentSlice = createSlice({
   },
 });
 
-export const { clearComment} = commentSlice.actions;
+export const { clearComment } = commentSlice.actions;
 export default commentSlice.reducer;

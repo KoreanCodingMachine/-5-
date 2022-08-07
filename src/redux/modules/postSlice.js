@@ -4,10 +4,17 @@ import axios from 'axios';
 // 데이터 송신
 // 액션 크리에이터(비동기 작업을 처리하는)
 
+const URI = {
+  BASE: process.env.REACT_APP_BASE_URI,
+};
+
+console.log(URI);
 // 게시글 리스트 GET
 const getAsyncData = createAsyncThunk('GET_DATA', async () => {
   try {
-    const response = await axios.get('http://localhost:5001/post_data');
+    // 'http://localhost:5001/post_data'
+    const response = await axios.get(URI.BASE);
+    console.log(response);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -20,15 +27,12 @@ const putAsyncData = createAsyncThunk(
   'PUT_DATA',
   async ({ id, title, content, writer }) => {
     try {
-      const response = await axios.put(
-        `http://localhost:5001/post_data/${id}`,
-        {
-          id: id,
-          title: title,
-          content: content,
-          writer: writer,
-        }
-      );
+      const response = await axios.put(`${URI.BASE}/${id}`, {
+        id: id,
+        title: title,
+        content: content,
+        writer: writer,
+      });
       console.log(response.data);
       return response.data;
     } catch (e) {
@@ -41,9 +45,7 @@ const putAsyncData = createAsyncThunk(
 // 게시글 삭제 DELETE
 const deleteAsyncData = createAsyncThunk('DELETE_DATA', async (id) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:5001/post_data/${id}`
-    );
+    const response = await axios.delete(`${URI.BASE}/${id}`);
     console.log(response);
     return id;
   } catch (e) {
@@ -74,7 +76,7 @@ const deleteAsyncData = createAsyncThunk('DELETE_DATA', async (id) => {
 const postAsyncData = createAsyncThunk(
   'ADD_POST',
   async ({ title, content, writer }) => {
-    const response = await axios.post('http://localhost:5001/post_data', {
+    const response = await axios.post(URI.BASE, {
       title: title,
       content: content,
       writer: writer,
