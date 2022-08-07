@@ -12,8 +12,6 @@ export const store = configureStore({
     post: postReducer,
     comments,
     comment,
-    todo,
-    todos,
   },
 });
 

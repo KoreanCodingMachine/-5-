@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import Button from '../common/Button';
 import {
   __deleteComment,
   __updateComment,
@@ -71,16 +72,16 @@ const Comment = ({ comment }) => {
             />
           </div>
           <div>
-            <button
+            <Button
               onClick={onCancelButtonHandler}
             >
               <p>취소</p>
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={onUpdateButtonHandler}
             >
               <p >저장</p>
-            </button>
+            </Button>
           </div>
         </>
       ) : (
@@ -90,15 +91,15 @@ const Comment = ({ comment }) => {
             <p>{comment.content}</p>
           </div>
           <div>
-            <button
+            <Button
               onClick={onChangeEditButtonHandler}
             >
               수정
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={onDeleteButtonHandler}
             >삭제
-            </button>
+            </Button>
           </div>
         </>
       )}

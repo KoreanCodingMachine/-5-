@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { __addComment } from '../../redux/modules/commentsSlice';
+import Button from '../common/Button';
 
 const AddComment = () => {
   const dispatch = useDispatch();
@@ -52,9 +53,9 @@ const AddComment = () => {
         onChange={onChangeInputHandler}
         maxLength={100}
       />
-      <button type='submit' onClick={onAddCommentButtonHandler}>
+      <Button type='submit' onClick={onAddCommentButtonHandler}>
         추가하기
-      </button>
+      </Button>
     </form>
   );
 };
