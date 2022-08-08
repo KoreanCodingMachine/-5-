@@ -11,13 +11,11 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const initialState = {
-    id: 0,
-    title: '',
-    content: '',
-    writer: '',
-  };
+
+ 
   // state가 정의 안되있어서 undefined 에러가 났다.
+
+
   const todo_list = useSelector((state) => state.post.post);
   console.log(todo_list);
 
@@ -40,6 +38,9 @@ const Detail = () => {
     return () => dispatch(__getCommnetsByTodoId('a'));
   }, []);
 
+  const { data } = useSelector((state) => state.comments.commentsByTodoId);
+  console.log(data);
+
   return (
     <div>
       <button
@@ -53,6 +54,7 @@ const Detail = () => {
       <div>작성자 : {post.writer}</div>
       <h2>제목 : {post.title}</h2>
       <div>내용 : {post.content}</div>
+
 
       <AddComment />
       <div>
