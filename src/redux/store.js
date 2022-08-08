@@ -13,6 +13,7 @@ export const store = configureStore({
     todo,
     todos,
   },
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;

@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   __deleteComment,
   __updateComment,
-} from "../../redux/modules/commentsSlice";
-import {
-  clearComment,
-  __getComment,
-} from "../../redux/modules/commentSlice";
+} from '../../redux/modules/commentsSlice';
+import { clearComment, __getComment } from '../../redux/modules/commentSlice';
 
 const Comment = ({ comment }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [updatedComment, setUpdatedComment] = useState("");
+  const [updatedComment, setUpdatedComment] = useState('');
   const { content } = useSelector((state) => state.comment.data);
 
-
   const onDeleteButtonHandler = () => {
-    const result = window.confirm("삭제하시겠습니까?");
+    const result = window.confirm('삭제하시겠습니까?');
     if (result) {
       dispatch(__deleteComment(comment.id));
     } else {
@@ -41,7 +37,6 @@ const Comment = ({ comment }) => {
     setIsEdit(false);
   };
 
-
   const onChangeEditButtonHandler = () => {
     setIsEdit(true);
     dispatch(__getComment(comment.id));
@@ -56,14 +51,13 @@ const Comment = ({ comment }) => {
     setUpdatedComment(content);
   }, [content]);
 
-
   return (
     <div>
       {isEdit ? (
         <>
           <div>
             <input
-              type="text"
+              type='text'
               value={updatedComment}
               onChange={(event) => {
                 setUpdatedComment(event.target.value);
@@ -71,15 +65,11 @@ const Comment = ({ comment }) => {
             />
           </div>
           <div>
-            <button
-              onClick={onCancelButtonHandler}
-            >
+            <button onClick={onCancelButtonHandler}>
               <p>취소</p>
             </button>
-            <button
-              onClick={onUpdateButtonHandler}
-            >
-              <p >저장</p>
+            <button onClick={onUpdateButtonHandler}>
+              <p>저장</p>
             </button>
           </div>
         </>
@@ -90,23 +80,13 @@ const Comment = ({ comment }) => {
             <p>{comment.content}</p>
           </div>
           <div>
-            <button
-              onClick={onChangeEditButtonHandler}
-            >
-              수정
-            </button>
-            <button
-              onClick={onDeleteButtonHandler}
-            >삭제
-            </button>
+            <button onClick={onChangeEditButtonHandler}>수정</button>
+            <button onClick={onDeleteButtonHandler}>삭제</button>
           </div>
         </>
       )}
     </div>
   );
-}
+};
 
 export default Comment;
-
-
-

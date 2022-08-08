@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ListItem from './ListItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAsyncData } from '../../redux/modules/postSlice';
@@ -9,11 +9,8 @@ const List = () => {
   }, []);
 
   const data = useSelector((state) => state.post.post); // 20
-  const data2 = useSelector((state) => state.post); // {post: 20, loading: false, error: true}
-  console.log(data2);
 
   const dispatch = useDispatch();
-  console.log(data);
 
   return (
     <>

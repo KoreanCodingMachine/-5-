@@ -17,6 +17,18 @@ export const __getCommnetsByTodoId = createAsyncThunk(
   }
 );
 
+export const __deleteCommentByTodoId = createAsyncThunk(
+  'DELETE_COMMNET_BY_TODO_ID',
+  async (arg, thunkAPI) => {
+    try {
+      const { data } = await axios.delete(`${URI.BASE}?todoId=${arg}`);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export const __addComment = createAsyncThunk(
   'ADD_COMMENT',
   async (arg, thunkAPI) => {
@@ -33,6 +45,7 @@ export const __deleteComment = createAsyncThunk(
   'DELETE_COMMENT',
   async (arg, thunkAPI) => {
     try {
+      console.log(arg);
       await axios.delete(`${URI.BASE}/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
@@ -78,7 +91,20 @@ export const commentsSlice = createSlice({
       state.commentsByTodoId.isLoading = false;
       state.commentsByTodoId.error = action.payload;
     },
-
+    //  메인에서 삭제햇을때 댓글도 삭제
+    [__deleteCommentByTodoId.pending]: (state) => {
+      state.commentsByTodo.isLoading = true;
+    },
+    [__deleteCommentByTodoId.fulfilled]: (state, action) => {
+      state.commentsByTodoId.isLoading = false;
+      state.commentsByTodo.data = state.commentsByTodo.data.filter(
+        (item) => parseInt(item.id) !== action.payload
+      );
+    },
+    [__deleteCommentByTodoId.rejected]: (state, action) => {
+      state.commentsByTodoId.isLoading = false;
+      state.commentsByTodoId.error = action.payload;
+    },
     // 댓글 삭제
     [__deleteComment.pending]: (state) => {
       state.commentsByTodoId.isLoading = true;

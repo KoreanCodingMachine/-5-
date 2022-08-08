@@ -17,7 +17,7 @@ const AddCommentForm = () => {
     if (comment.content.trim() === '' || comment.username.trim() === '') {
       return alert('모든 항목을 입력해주세요.');
     }
-    dispatch(__addComment({ todoId: id, ...comment }));
+    dispatch(__addComment({ todoId: parseInt(id), ...comment }));
     setComment({
       username: '',
       content: '',

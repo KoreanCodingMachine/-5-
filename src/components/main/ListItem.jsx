@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteAsyncData } from '../../redux/modules/postSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { __deleteCommentByTodoId } from '../../redux/modules/commentsSlice';
 
 const ListItem = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const initialState = {
+    todoId: 1,
+    username: '',
+    content: '',
+    id: 1,
+  };
+
+  const { data } = useSelector((state) => state.comments.commentsByTodoId);
+  console.log(data);
+
+  const handleDelete = () => {
+    dispatch(__deleteCommentByTodoId(item.id));
+    dispatch(deleteAsyncData(item.id));
+  };
   return (
     <Wrapper>
       <section className='title' onClick={() => navigate('/detail/' + item.id)}>
@@ -24,13 +40,7 @@ const ListItem = ({ item }) => {
             수정
           </Button>
         </Link>
-        <Button
-          onClick={() => {
-            dispatch(deleteAsyncData(item.id));
-          }}
-        >
-          삭제
-        </Button>
+        <Button onClick={handleDelete}>삭제</Button>
       </section>
     </Wrapper>
   );
