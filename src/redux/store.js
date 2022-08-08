@@ -12,6 +12,7 @@ export const store = configureStore({
     comments,
     comment,
   },
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;

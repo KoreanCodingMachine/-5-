@@ -3,10 +3,20 @@ import Button from '../components/common/Button';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { putAsyncData, getAsyncData } from '../redux/modules/postSlice';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
-const ChangeForm = () => {
+const Detail = () => {
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const dispatch = useDispatch();
   const params = useParams();
+
+  const onSubmit = (data) => console.log(data);
 
   const [title, setTitle] = useState('');
   const [writer, setWriter] = useState('');
@@ -45,11 +55,16 @@ const ChangeForm = () => {
   const data = location.state;
   console.log(data);
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor='writer'>
           작성자:
-          <input type='text' value={writer} onChange={onChangeWriter} />
+          <input
+            {...register('writer', { required: '5글자 이내로 입력해주세요' })}
+            type='text'
+            value={writer}
+            onChange={onChangeWriter}
+          />
         </label>
         <label htmlFor='title'>
           제목:
@@ -62,8 +77,8 @@ const ChangeForm = () => {
       </div>
       <Button
         onClick={() => {
-          dispatch(putAsyncData({ id, title, content, writer }));
-          navigate('/');
+          // dispatch(putAsyncData({ id, title, content, writer }));
+          // navigate('/');
         }}
       >
         수정완료
@@ -72,4 +87,4 @@ const ChangeForm = () => {
   );
 };
 
-export default ChangeForm;
+export default Detail;

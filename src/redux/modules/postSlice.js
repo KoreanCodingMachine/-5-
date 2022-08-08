@@ -8,11 +8,21 @@ const URI = {
   BASE: process.env.REACT_APP_BASE_URI,
 };
 
-console.log(URI);
 // 게시글 리스트 GET
 const getAsyncData = createAsyncThunk('GET_DATA', async () => {
   try {
     // 'http://localhost:5001/post_data'
+    const response = await axios.get(URI.BASE);
+    console.log(response);
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+});
+
+const getAsyncDataSlice = createAsyncThunk('GET_DATA_SLICE', async () => {
+  try {
     const response = await axios.get(URI.BASE);
     console.log(response);
     return response.data;
@@ -54,25 +64,7 @@ const deleteAsyncData = createAsyncThunk('DELETE_DATA', async (id) => {
   }
 });
 
-// 게시글 업로드 POST
-// const postAsyncData = createAsyncThunk(
-//   'POST_DATA',
-//   async ({ title, content, writer }) => {
-//     try {
-//       const response = await axios.post('http://localhost:5001/post_data', {
-//         title: title,
-//         content: content,
-//         writer: writer,
-//       });
-//       console.log(response.data);
-//       return { writer, title, content };
-//     } catch (e) {
-//       console.log(e);
-//       throw e;
-//     }
-//   }
-// );
-
+// 게시글 요청 POST
 const postAsyncData = createAsyncThunk(
   'ADD_POST',
   async ({ title, content, writer }) => {
@@ -89,6 +81,7 @@ const postAsyncData = createAsyncThunk(
 
 const initialState = {
   post: [],
+  postSlice: [],
   loading: false,
   error: null,
 };
@@ -174,6 +167,13 @@ const postSlice = createSlice({
       .addCase(deleteAsyncData.rejected, (state) => {
         state.loading = false;
         state.error = true;
+      })
+      .addCase(getAsyncDataSlice.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAsyncDataSlice.fulfilled, (state, action) => {
+        state.loading = false;
+        state.post = [...state.post, action.payload];
       });
   },
 });
