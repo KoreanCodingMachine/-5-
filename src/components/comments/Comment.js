@@ -61,8 +61,8 @@ const Comment = ({ comment }) => {
   return (
     <div>
       {isEdit ? (
-        <>
-          <div>
+          <Wrapper>
+            <p>작성자 : {comment.username}</p>
             <input
               type="text"
               value={updatedComment}
@@ -70,27 +70,28 @@ const Comment = ({ comment }) => {
                 setUpdatedComment(event.target.value);
               }}
             />
-          </div>
-          <div>
-            <Button
-              onClick={onCancelButtonHandler}
-            >
-              <p>취소</p>
-            </Button>
-            <Button
-              onClick={onUpdateButtonHandler}
-            >
-              <p >저장</p>
-            </Button>
-          </div>
-        </>
+
+            <ButtonSet>
+              <Button
+                onClick={onCancelButtonHandler}
+              >
+                <p>취소</p>
+              </Button>
+              <Button
+                onClick={onUpdateButtonHandler}
+              >
+                <p >저장</p>
+              </Button>
+            </ButtonSet>
+          </Wrapper>
+      
       ) : (
         <>
-          <div>
-            <p>{comment.username}</p>
-            <p>{comment.content}</p>
-          </div>
-          <div>
+          <Wrapper>
+            <p>작성자 : {comment.username}</p>
+            <p>내용 : {comment.content}</p>
+          
+          <ButtonSet>
             <Button
               onClick={onChangeEditButtonHandler}
             >
@@ -100,7 +101,9 @@ const Comment = ({ comment }) => {
               onClick={onDeleteButtonHandler}
             >삭제
             </Button>
-          </div>
+          </ButtonSet>
+            
+          </Wrapper>
         </>
       )}
     </div>
@@ -108,6 +111,24 @@ const Comment = ({ comment }) => {
 }
 
 export default Comment;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid gray;
+  margin: 0 auto;
+  padding: 10px 10px;
+  margin-top: 1rem;
+  width: 500px;
+  .title {
+    display: block;
+  }
+`;
+
+const ButtonSet =styled.div`
+  float: right;
+`;
 
 
 

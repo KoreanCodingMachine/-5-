@@ -8,12 +8,9 @@ const List = () => {
     dispatch(getAsyncData());
   }, []);
 
-  const data = useSelector((state) => state.post.post); // 20
-  const data2 = useSelector((state) => state.post); // {post: 20, loading: false, error: true}
-  console.log(data2);
-
+  const data = useSelector((state) => state.post.post);
   const dispatch = useDispatch();
-  console.log(data);
+
 
   return (
     <>

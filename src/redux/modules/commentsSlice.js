@@ -38,6 +38,18 @@ export const __deleteComment = createAsyncThunk(
     }
   }
 );
+// export const __deleteComments = createAsyncThunk(
+//   "DELETE_COMMENTS",
+//   async (arg, thunkAPI) => {
+//     try {
+//       await axios.post(`http://localhost:5001/comment_list?todoId=${arg}`);
+//       return thunkAPI.fulfillWithValue(arg);
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.code);
+//     }
+//   }
+// );
+
 
 
 export const __updateComment = createAsyncThunk(
@@ -97,6 +109,22 @@ export const commentsSlice = createSlice({
       state.commentsByTodoId.error = action.payload;
     },
 
+      // // 해당 아이디 댓글 모두 삭제
+      // [__deleteComments.pending]: (state) => {
+      //   state.commentsByTodoId.isLoading = true;
+      // },
+      // [__deleteComments.fulfilled]: (state, action) => {
+      //   state.data.isLoading = false;
+      //   const target = state.commentsByTodoId.data.findIndex(
+      //     (comment) => comment.id === action.payload);
+      //   console.log(target);
+      //   state.data.splice(target, 1);
+      // },
+      // [__deleteComments.rejected]: (state, action) => {
+      //   state.commentsByTodoId.isLoading = false;
+      //   state.commentsByTodoId.error = action.payload;
+      // },
+    
   //   // 댓글 수정
     [__updateComment.pending]: (state) => {},
     [__updateComment.fulfilled]: (state, action) => {

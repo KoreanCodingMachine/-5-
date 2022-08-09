@@ -44,7 +44,7 @@ const deleteAsyncData = createAsyncThunk('DELETE_DATA', async (id) => {
     const response = await axios.delete(
       `http://localhost:5001/post_data/${id}`
     );
-    console.log(response);
+    
     return id;
   } catch (e) {
     console.log(e);
@@ -176,6 +176,6 @@ const postSlice = createSlice({
   },
 });
 
-export const { inputData, addData, changeData, deleteData } = postSlice.actions;
+
 export default postSlice.reducer;
 export { getAsyncData, deleteAsyncData, postAsyncData, putAsyncData };

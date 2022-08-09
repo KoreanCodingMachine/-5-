@@ -5,9 +5,19 @@ import { useDispatch } from 'react-redux';
 import { deleteAsyncData } from '../../redux/modules/postSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const ListItem = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+  const onDeleteHandler = () => {
+      dispatch(deleteAsyncData(item.id));
+     
+  };
+
+
+
   return (
     <Wrapper>
       <section className='title' onClick={() => navigate('/detail/' + item.id)}>
@@ -25,9 +35,7 @@ const ListItem = ({ item }) => {
           </Button>
         </Link>
         <Button
-          onClick={() => {
-            dispatch(deleteAsyncData(item.id));
-          }}
+          onClick={onDeleteHandler}
         >
           삭제
         </Button>

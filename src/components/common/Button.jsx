@@ -18,6 +18,7 @@ const StyledButton = styled.button`
   color: white;
   outline: none;
   cursor: pointer;
+  margin-right: 10px;
 
   background: ${palette.gray[8]};
   &:hover {
